@@ -1,37 +1,36 @@
 <template>
   <div>
-    <p>{{ title }}</p>
-    <ul>
-      <li v-for="todo in todos" :key="todo.id" @click="increment">
-        {{ todo.id }} - {{ todo.content }}
-      </li>
-    </ul>
-    <p>Count: {{ todoCount }} / {{ meta.totalCount }}</p>
-    <p>Active: {{ active ? 'yes' : 'no' }}</p>
-    <p>Clicks on todos: {{ clickCount }}</p>
+    <!-- <p>{{ title }}</p> -->
+    <button
+      @click="
+        () =>
+          signin().then((e) => {
+            if (e.success === false) {
+              router.push('/signUp');
+            }
+          })
+      "
+    >
+      Sign
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { Todo, Meta } from './models';
+import { useRouter } from 'vue-router';
+import signin from '../utils/firebase';
 
-interface Props {
-  title: string;
-  todos?: Todo[];
-  meta: Meta;
-  active: boolean;
-}
-const props = withDefaults(defineProps<Props>(), {
-  todos: () => [],
-});
+// import { Todo, Meta } from './models';
 
-const clickCount = ref(0);
-function increment() {
-  clickCount.value += 1;
-  return clickCount.value;
-}
+// interface Props {
+//   title: string;
+//   todos?: Todo[];
+//   meta: Meta;
+//   active: boolean;
+// }
+// const props = withDefaults(defineProps<Props>(), {
+//   todos: () => [],
+// });
 
-const todoCount = computed(() => props.todos.length);
-
+const router = useRouter();
 </script>
