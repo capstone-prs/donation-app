@@ -1,36 +1,31 @@
 <template>
   <div>
-    <!-- <p>{{ title }}</p> -->
-    <button
-      @click="
-        () =>
-          signin().then((e) => {
-            if (e.success === false) {
-              router.push('/signUp');
-            }
-          })
-      "
-    >
-      Sign
-    </button>
+    <googleSignIn />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import signin from '../utils/firebase';
+// import { useRouter } from 'vue-router';
+import googleSignIn from './buttons/GoogleSignIn.vue';
+// import GoogleLogin from 'vue-google-login';
 
-// import { Todo, Meta } from './models';
-
-// interface Props {
-//   title: string;
-//   todos?: Todo[];
-//   meta: Meta;
-//   active: boolean;
-// }
-// const props = withDefaults(defineProps<Props>(), {
-//   todos: () => [],
-// });
-
-const router = useRouter();
+// const router = useRouter();
 </script>
+<style>
+.google-login-button {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.google-logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+</style>

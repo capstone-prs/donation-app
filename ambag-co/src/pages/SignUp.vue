@@ -1,80 +1,90 @@
 <template>
-  <modal class="full-width column justify-center">
-    <form @submit.prevent.stop="submit" class="q-gutter-md">
-      <div class="element-signup">
-        <div class="wrap" style="padding: 10px 0px 0px 10px">
-          <q-btn
-            class="glossy"
-            round
-            color="red"
-            icon="arrow_back"
-            @click="navigateBack"
-          />
-        </div>
-        <div>
-          <q-card-section class="q-md">
-            <q-input
-              class="authInputsBig"
-              id="name"
-              :ref="data.name.ref"
-              rounded
-              outlined
-              v-model="data.name.model.value"
-              label="Your name"
-              lazyRules
-            >
-              <template v-slot:prepend> <q-icon name="person" /></template>
-            </q-input>
-          </q-card-section>
-
-          <q-card-section class="q-md">
-            <q-input
-              :ref="data.age.ref"
-              class="authInputsSmall"
-              rounded
-              outlined
-              v-model="data.age.model.value"
-              type="number"
-              label="Age"
-              lazyRules
-            >
-              <template v-slot:prepend>
-                <q-icon name="img:/age-icon.svg " size="30px" />
-              </template>
-            </q-input>
-          </q-card-section>
-
-          <q-card-section class="q-md">
-            <q-select
-              class="authInputsSmall"
-              rounded
-              outlined
-              :ref="data.gender.ref"
-              v-model="data.gender.model.value"
-              :options="data.gender.options"
-              label="Gender"
-              lazyRules
-            >
-              <template v-slot:prepend>
-                <q-icon name="wc" />
-              </template>
-            </q-select>
-          </q-card-section>
-        </div>
-        <div class="fixed-center">
-          <button
-            color="pink-12"
-            text-color="white"
-            class="text"
-            @click="submit"
-            :isDisabled="isSubmitted"
-          >
-            {{ Text }}
-          </button>
-        </div>
+  <!-- <modal class="full-width column justify-center"> -->
+  <div class="q-px-sm q-py-lg">
+    <div class="row">
+      <div class="col">
+        Welcome new user please fill up the information inorder to complete you
+        signup
       </div>
-    </form>
-  </modal>
+      <div class="col">
+        <form @submit.prevent.stop="submit" class="q-gutter-md">
+          <div class="element-signup">
+            <div class="wrap" style="padding: 10px 0px 0px 10px">
+              <q-btn
+                class="glossy"
+                round
+                color="red"
+                icon="arrow_back"
+                @click="navigateBack"
+              />
+            </div>
+            <div>
+              <q-card-section class="q-md">
+                <q-input
+                  class="authInputsBig"
+                  id="name"
+                  :ref="data.name.ref"
+                  rounded
+                  outlined
+                  v-model="data.name.model.value"
+                  label="Your name"
+                  lazyRules
+                >
+                  <template v-slot:prepend> <q-icon name="person" /></template>
+                </q-input>
+              </q-card-section>
+
+              <q-card-section class="q-md">
+                <q-input
+                  :ref="data.age.ref"
+                  class="authInputsSmall"
+                  rounded
+                  outlined
+                  v-model="data.age.model.value"
+                  type="number"
+                  label="Age"
+                  lazyRules
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="img:/age-icon.svg " size="30px" />
+                  </template>
+                </q-input>
+              </q-card-section>
+
+              <q-card-section class="q-md">
+                <q-select
+                  class="authInputsSmall"
+                  rounded
+                  outlined
+                  :ref="data.gender.ref"
+                  v-model="data.gender.model.value"
+                  :options="data.gender.options"
+                  label="Gender"
+                  lazyRules
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="wc" />
+                  </template>
+                </q-select>
+              </q-card-section>
+            </div>
+            <div class="fixed-center">
+              <button
+                color="pink-12"
+                text-color="white"
+                class="text"
+                @click="submit"
+                :isDisabled="isSubmitted"
+              >
+                {{ Text }}
+              </button>
+            </div>
+          </div>
+        </form>
+        <!-- </modal> -->
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -87,9 +97,7 @@ import { Gender } from '../types/Users';
 const $q = useQuasar();
 const router = useRouter();
 
-const Text = 'sign up';
-
-// const props = defineProps<{ onSubmit: (formData: NewUser) => Promise<void> }>();
+const Text = 'Sign up';
 
 const triggerNotify = (type: string, message: string) => {
   $q.notify({
@@ -147,7 +155,7 @@ const submit = () => {
       },
       uid
     )
-      .then(() => triggerNotify('positive', 'Successful Sign In'))
+      .then(() => triggerNotify('positive', 'Successful Sign Up'))
       .then(() => {
         showLoading();
         router.push('/');
