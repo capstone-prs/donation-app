@@ -12,19 +12,19 @@
           square
           label="HOME"
           text-color="grey-7"
-          @click="navigateToHome"
+          @click="navigateTo('home')"
         />
         <q-fab-action
           square
           label="DONORS"
           text-color="grey-7"
-          @click="navigateToDonor"
+          @click="navigateTo('donor')"
         />
         <q-fab-action
           square
           label="PROJECTS"
           text-color="grey-7"
-          @click="navigateToProject"
+          @click="navigateTo('project')"
         />
       </q-fab>
     </div>
@@ -37,7 +37,7 @@
           text-color="teal"
           style="background-color: rgb(244, 244, 244)"
           size="20px"
-          @click="navigateToProfile"
+          @click="navigateTo('profile')"
         />
       </div>
     </div>
@@ -48,18 +48,7 @@
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const navigateToProject = () => {
-  router.push('/project');
-};
-
-const navigateToHome = () => {
-  router.push('/home');
-};
-
-const navigateToDonor = () => {
-  router.push('/donor');
-};
-const navigateToProfile = () => {
-  router.push('/profile');
+const navigateTo = (page: string) => {
+  router.push(`/${page}`);
 };
 </script>
