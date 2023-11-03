@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <button @click="onClick" class="google-login-button">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-        alt="Google Logo"
-        class="google-logo"
-      />
-      Sign in with Google
-    </button>
-  </div>
+  <q-btn
+    @click="onClick"
+    class="google-login-button"
+    outline
+    rounded
+    color="teal"
+  >
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+      alt="Google Logo"
+      class="google-logo"
+    />
+    Sign in with Google
+  </q-btn>
 </template>
 
 <script setup lang="ts">
@@ -30,10 +34,10 @@ const onClick = () =>
   align-items: center;
   background-color: #fff;
   border: 1px solid #ccc;
-  border-radius: 4px;
   padding: 8px 16px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: bolder;
+  padding: 15px;
 }
 
 .google-logo {

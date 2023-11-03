@@ -1,90 +1,80 @@
 <template>
-  <!-- <modal class="full-width column justify-center"> -->
-  <div class="q-px-sm q-py-lg">
-    <div class="row">
-      <div class="col">
-        Welcome new user please fill up the information inorder to complete you
-        signup
-      </div>
-      <div class="col">
-        <form @submit.prevent.stop="submit" class="q-gutter-md">
-          <div class="element-signup">
-            <div class="wrap" style="padding: 10px 0px 0px 10px">
-              <q-btn
-                class="glossy"
-                round
-                color="red"
-                icon="arrow_back"
-                @click="navigateBack"
-              />
-            </div>
-            <div>
-              <q-card-section class="q-md">
-                <q-input
-                  class="authInputsBig"
-                  id="name"
-                  :ref="data.name.ref"
-                  rounded
-                  outlined
-                  v-model="data.name.model.value"
-                  label="Your name"
-                  lazyRules
-                >
-                  <template v-slot:prepend> <q-icon name="person" /></template>
-                </q-input>
-              </q-card-section>
+  <q-layout>
+    <q-header class="transparent">
+      <q-btn
+        icon="arrow_back_ios"
+        text-color="teal"
+        class="transparent q-ma-md"
+        flat
+        @click="navigateBack"
+      />
+    </q-header>
+    <q-page-container class="absolute-center">
+      <div class="row" style="width: 300px">
+        <div class="row q-mb-sm text-h6" style="color: teal" align="center">
+          Welcome to AMBAG.CO! Fill up the information to complete your signup.
+        </div>
 
-              <q-card-section class="q-md">
-                <q-input
-                  :ref="data.age.ref"
-                  class="authInputsSmall"
-                  rounded
-                  outlined
-                  v-model="data.age.model.value"
-                  type="number"
-                  label="Age"
-                  lazyRules
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="img:/age-icon.svg " size="30px" />
-                  </template>
-                </q-input>
-              </q-card-section>
+        <div class="q-ma-sm" style="width: 100%" align="center">
+          <q-form @submit.prevent.stop="submit">
+            <q-input
+              class="q-mb-sm"
+              id="name"
+              :ref="data.name.ref"
+              rounded
+              outlined
+              v-model="data.name.model.value"
+              label="Your name"
+              lazyRules
+            >
+              <template v-slot:prepend>
+                <q-icon color="teal" name="person"
+              /></template>
+            </q-input>
 
-              <q-card-section class="q-md">
-                <q-select
-                  class="authInputsSmall"
-                  rounded
-                  outlined
-                  :ref="data.gender.ref"
-                  v-model="data.gender.model.value"
-                  :options="data.gender.options"
-                  label="Gender"
-                  lazyRules
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="wc" />
-                  </template>
-                </q-select>
-              </q-card-section>
-            </div>
-            <div class="fixed-center">
-              <button
-                color="pink-12"
-                text-color="white"
-                class="text"
-                @click="submit"
-                :isDisabled="isSubmitted"
-              >
-                {{ Text }}
-              </button>
-            </div>
-          </div>
-        </form>
-        <!-- </modal> -->
+            <q-input
+              class="q-mb-sm"
+              :ref="data.age.ref"
+              rounded
+              outlined
+              v-model="data.age.model.value"
+              type="number"
+              label="Age"
+              lazyRules
+            >
+              <template v-slot:prepend>
+                <q-icon name="plus_one " color="teal" />
+              </template>
+            </q-input>
+
+            <q-select
+              class="q-mb-md"
+              rounded
+              outlined
+              :ref="data.gender.ref"
+              v-model="data.gender.model.value"
+              :options="data.gender.options"
+              label="Gender"
+              lazyRules
+            >
+              <template v-slot:prepend>
+                <q-icon name="wc" color="teal" />
+              </template>
+            </q-select>
+
+            <q-btn
+              size="20px"
+              @click="submit"
+              :isDisabled="isSubmitted"
+              rounded
+              color="teal"
+              >SIGNUP</q-btn
+            >
+          </q-form>
+        </div>
       </div>
-    </div>
-  </div>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script setup lang="ts">
