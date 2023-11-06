@@ -18,13 +18,15 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import signin from '../../utils/firebase';
-
 const router = useRouter();
 
 const onClick = () =>
   signin().then((e) => {
     if (e.success === false) {
       router.push('/signUp');
+    }
+    else{
+      router.push('/home')
     }
   });
 </script>
