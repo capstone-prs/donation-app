@@ -87,8 +87,6 @@ import { Gender } from '../types/Users';
 const $q = useQuasar();
 const router = useRouter();
 
-const Text = 'Sign up';
-
 const triggerNotify = (type: string, message: string) => {
   $q.notify({
     type: type,
@@ -148,7 +146,7 @@ const submit = () => {
       .then(() => triggerNotify('positive', 'Successful Sign Up'))
       .then(() => {
         showLoading();
-        router.push('/');
+        router.push('/home');
       });
   }
   // triggerNotify('negative', 'Failed Sign In');

@@ -18,13 +18,21 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import signin from '../../utils/firebase';
+import { useQuasar } from 'quasar';
 
+const $q = useQuasar();
 const router = useRouter();
 
 const onClick = () =>
   signin().then((e) => {
-    if (e.success === false) {
+    if (!e.success) {
       router.push('/signUp');
+    } else if (e.success) {
+      $q.notify({
+        type: 'positive',
+        message: 'Successful Log In',
+      });
+      router.push('/home');
     }
   });
 </script>

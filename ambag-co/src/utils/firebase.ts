@@ -2,7 +2,7 @@ import { getDoc, doc, setDoc } from 'firebase/firestore';
 import app, { db } from '../boot/firebase';
 import { NewUser } from '../types/Users';
 
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, getAuth, signInWithPopup,signOut } from 'firebase/auth';
 
 const provider = new GoogleAuthProvider();
 
@@ -37,5 +37,7 @@ export const addUser = (data: NewUser, id: string) =>
     ...data,
     user_id: id,
   });
+
+export const logout = () => signOut(auth);
 
 export default signin;
