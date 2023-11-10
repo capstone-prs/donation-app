@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col">
-      <q-card class="q-mb-lg q-ml-xl q-mr-xl">
+      <q-card class="q-mb-lg q-ml-xl q-mr-xl project-card" @click="openProject">
         <q-card-section horizontal>
           <q-img :src="backgroundImage" height="150px" />
         </q-card-section>
@@ -18,10 +18,20 @@
         </q-card-section>
       </q-card>
     </div>
+    <div>
+      <donate-dialog
+        :recipient="targetRecipient"
+        :target-fund="goalFunding"
+        v-model="isDialogOpen"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import DonateDialog from './DonateDialog.vue';
+
 defineProps({
   projectTitle: {
     type: String,
@@ -41,4 +51,16 @@ defineProps({
     required: true,
   },
 });
+
+const isDialogOpen = ref(false);
+
+const openProject = () => {
+  isDialogOpen.value = true;
+};
 </script>
+
+<style>
+.project-card:hover {
+  cursor: pointer;
+}
+</style>
