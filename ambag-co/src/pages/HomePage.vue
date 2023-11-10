@@ -25,16 +25,6 @@
           background-image="/sample2.jpg"
         />
       </div>
-      <q-btn
-        flat
-        round
-        icon="add"
-        text-color="teal"
-        style="background-color: #defade; position: fixed; top: 85%; left: 75%"
-        size="20px"
-        @click="openDialog"
-      />
-      <AddProject v-model="isDialogOpen" />
 
     </q-page-container>
   </q-layout>
@@ -45,11 +35,6 @@
 import FeatureComponent from '../components/FeatureComponent.vue';
 import ProjectComponent from '../components/ProjectComponent.vue';
 import HeaderLayout from '../layouts/HeaderLayout.vue';
-import AddProject from './AddProject.vue';
-const isDialogOpen = ref(false);
-const openDialog = () => {
-  isDialogOpen.value = true;
-};
 
 import Web3 from 'web3';
 import abi from './USDT_contract_ABI.json';
