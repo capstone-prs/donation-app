@@ -1,13 +1,32 @@
-import { getDoc, doc, setDoc } from 'firebase/firestore';
+import { getDoc, doc, addDoc,setDoc, collection, getDocs,DocumentData } from 'firebase/firestore';
 import app, { db } from '../boot/firebase';
-import { NewUser } from '../types/Users';
+import { NewUser, Project, NewProject } from '../types/Users';
 
-import { GoogleAuthProvider, getAuth, signInWithPopup,signOut } from 'firebase/auth';
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signOut
+} from 'firebase/auth';
 
 const provider = new GoogleAuthProvider();
 
 const auth = getAuth(app);
 
+export const getProjects = () =>
+  getDocs(collection(db, 'Projects')).then((snap) => snap.docs.map((doc)=> 
+     doc.data() as Project
+    ) 
+  );
+
+
+
+
+ export const addProjects = (data: NewProject) =>{
+ addDoc(collection(db, 'Projects'), {
+   ...data,
+ }).catch((w)=>console.log(w))
+}
 export const getUid = () => auth.currentUser?.uid;
 export const getUser = (id: string) =>
   getDoc(doc(db, 'Users', id)).then((snap) => {
@@ -35,7 +54,7 @@ const signin = () =>
 export const addUser = (data: NewUser, id: string) =>
   setDoc(doc(db, 'Users', id), {
     ...data,
-    user_id: id,
+    user_id: id
   });
 
 export const logout = () => signOut(auth);

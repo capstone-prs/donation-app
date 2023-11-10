@@ -12,7 +12,16 @@
         PROJECTS
       </div>
       <div>
-        <ProjectComponent
+        <template v-for="project in projects" :key="project.project_name">
+          <ProjectComponent
+            :project-title="project.project_name"
+            :target-recipient="project.project_org"
+            :goal-funding="project.project_goal"
+            :background-image="project.project_image"
+          />
+        </template>
+
+        <!-- <ProjectComponent
           project-title="Aspiring Filmmakers Funding"
           target-recipient="JELOTODA"
           :goal-funding="2000"
@@ -24,13 +33,24 @@
           target-recipient="FAP"
           :goal-funding="5000"
           background-image="/sample2.jpg"
-        />
+        /> -->
       </div>
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup lang="ts">
+import { onBeforeMount, ref } from 'vue';
 import HeaderLayout from '../layouts/HeaderLayout.vue';
 import ProjectComponent from '../components/ProjectComponent.vue';
+import { getProjects } from 'src/utils/firebase';
+import { Project } from '../types/Users';
+
+const projects = ref<Project[]>([]);
+
+onBeforeMount(() => {
+  getProjects().then((data) => {
+    projects.value = data;
+  });
+});
 </script>
