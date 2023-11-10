@@ -50,8 +50,10 @@ import { onBeforeMount, ref } from 'vue';
 
 import app from 'src/boot/firebase';
 import detectEthereumProvider from '@metamask/detect-provider';
+import { useQuasar } from 'quasar';
 
 const currentUser = ref<User | null>(null);
+const $q = useQuasar();
 
 const router = useRouter();
 const navigateBack = () => {
@@ -78,6 +80,10 @@ const connectToWallet = async () => {
     console.log(account);
   } else {
     console.log('Please install MetaMask!');
+    $q.notify({
+      type: 'negative',
+      message: 'Please install MetaMask as browser extension',
+    });
   }
 };
 
