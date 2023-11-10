@@ -21,7 +21,19 @@
         <h6 style="color: grey">Donations Made</h6>
         <h5 style="color: teal">90 ETH</h5>
       </div>
-      <div class="q-pt-md centered-content">
+      <div class="q-pb-xl q-ma-md centered-content">
+        <q-btn
+          rounded
+          outline
+          color="teal-5"
+          size="lg"
+          @click="connectToWallet"
+        >
+          <q-icon name="img:/metamask-logo.png" />
+          CONNECT TO WALLET
+        </q-btn>
+      </div>
+      <div class="q-mt-xl centered-content">
         <q-btn rounded color="teal-5" size="lg" @click="handleLogOut"
           >LOGOUT</q-btn
         >
@@ -36,12 +48,36 @@ import { logout } from 'src/utils/firebase';
 import { User, getAuth } from 'firebase/auth';
 import { onBeforeMount, ref } from 'vue';
 import app from 'src/boot/firebase';
+import detectEthereumProvider from '@metamask/detect-provider';
 
 const currentUser = ref<User | null>(null);
 
 const router = useRouter();
 const navigateBack = () => {
   router.go(-1);
+};
+
+const connectToWallet = async () => {
+  const provider = await detectEthereumProvider();
+
+  if (provider?.isMetaMask) {
+    console.log('Metamask is installed');
+    const accounts = await (window as any).ethereum
+      .request({ method: 'eth_requestAccounts' })
+      .catch((err) => {
+        if (err.code === 4001) {
+          // EIP-1193 userRejectedRequest error
+          // If this happens, the user rejected the connection request.
+          console.log('Please connect to MetaMask.');
+        } else {
+          console.error(err);
+        }
+      });
+    const account = accounts[0];
+    console.log(account);
+  } else {
+    console.log('Please install MetaMask!');
+  }
 };
 
 onBeforeMount(() =>
