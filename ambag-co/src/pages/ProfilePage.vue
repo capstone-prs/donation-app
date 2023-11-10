@@ -35,6 +35,7 @@ import { useRouter } from 'vue-router';
 import { logout } from 'src/utils/firebase';
 import { User, getAuth } from 'firebase/auth';
 import { onBeforeMount, ref } from 'vue';
+
 import app from 'src/boot/firebase';
 
 const currentUser = ref<User | null>(null);
