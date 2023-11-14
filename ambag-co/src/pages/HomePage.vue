@@ -25,12 +25,13 @@
           background-image="/sample2.jpg"
         />
       </div>
+
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup lang="ts">
-// import DonorAvatar from '../components/DonorAvatar.vue';
+// import { ref} from 'vue';
 import FeatureComponent from '../components/FeatureComponent.vue';
 import ProjectComponent from '../components/ProjectComponent.vue';
 import HeaderLayout from '../layouts/HeaderLayout.vue';
