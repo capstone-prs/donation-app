@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+// import { createAProject } from '../utils/blockchain';
 
 defineProps({
   recipient: {
@@ -41,6 +42,17 @@ defineProps({
     required: true,
   },
 });
+
+// const action = () => {
+//   createAProject(
+//     '0xb6a06aB9e0E8aFD72098Ffc68C865c6BaC2cBEeF',
+//     'Title',
+//     'Description',
+//     1,
+//     9999999,
+//     'sadsadda'
+//   );
+// };
 
 const openDialog = ref(false);
 </script>
