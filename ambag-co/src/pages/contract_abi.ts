@@ -141,6 +141,72 @@ export const contract_abi = [
     type: 'function',
   },
   {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_id',
+        type: 'uint256',
+      },
+    ],
+    name: 'getProject',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'address',
+            name: 'founder',
+            type: 'address',
+          },
+          {
+            internalType: 'string',
+            name: 'title',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'description',
+            type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'goal',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'amountCollected',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'deadline',
+            type: 'uint256',
+          },
+          {
+            internalType: 'string',
+            name: 'image',
+            type: 'string',
+          },
+          {
+            internalType: 'address[]',
+            name: 'donors',
+            type: 'address[]',
+          },
+          {
+            internalType: 'uint256[]',
+            name: 'donations',
+            type: 'uint256[]',
+          },
+        ],
+        internalType: 'struct AmbagCo.Project[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [],
     name: 'numberOfProjects',
     outputs: [

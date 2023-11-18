@@ -6,16 +6,18 @@ export interface User {
 }
 
 export interface Project {
-  project_description:string;
-  project_goal:number;
-  project_image:string;
-  project_name:string;
-  project_org:string;
+  title: string;
+  description: string;
+  goal: number;
+  deadline: number;
+  image: string;
+}
+
+export interface Donor {
+  address: string;
+  donation: number;
 }
 
 export type Gender = 'Male' | 'Famale';
 export type NewUser = Omit<User, 'user_id'>;
 export type NewProject = Omit<Project, 'program_id'>;
-
-
-

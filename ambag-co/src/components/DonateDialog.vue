@@ -15,14 +15,40 @@
       </q-card-section>
       <q-card-section>
         <div class="text-h7">
-          You will be donating to: <i>{{ recipient }} </i>
-        </div>
-        <div class="text-h7">
           Help them reach: <b>{{ targetFund }} ETH </b>
         </div>
+        <q-input
+          standout
+          suffix="ETH"
+          outlined
+          filled
+          :ref="data.project_goal.ref"
+          v-model="data.project_goal.model.value"
+          label="Enter donation"
+          type="number"
+          :rules="[(val) => !!val || 'Field is required']"
+          lazy-rules
+          class="q-mt-md"
+        />
       </q-card-section>
-      <q-card-section align="center">
-        <q-btn icon="paid" label="SEND" rounded outlined color="teal" />
+      <q-card-section class="row" align="center">
+        <q-btn
+          icon="info"
+          label="VIEW"
+          rounded
+          outline
+          color="teal"
+          @click="navigateTo(index)"
+        />
+        <q-space />
+        <q-btn
+          icon="paid"
+          label="SEND"
+          rounded
+          outlined
+          color="teal"
+          @click="triggerDonation"
+        />
       </q-card-section>
     </q-card>
   </q-dialog>
@@ -30,11 +56,19 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-// import { createAProject } from '../utils/blockchain';
+import { fundAProject } from '../utils/blockchain';
+import { QInput } from 'quasar';
+import { useRouter } from 'vue-router';
 
-defineProps({
-  recipient: {
-    type: String,
+const router = useRouter();
+
+const props = defineProps({
+  index: {
+    type: Number,
+    required: true,
+  },
+  deadline: {
+    type: Number,
     required: true,
   },
   targetFund: {
@@ -43,16 +77,20 @@ defineProps({
   },
 });
 
-// const action = () => {
-//   createAProject(
-//     '0xb6a06aB9e0E8aFD72098Ffc68C865c6BaC2cBEeF',
-//     'Title',
-//     'Description',
-//     1,
-//     9999999,
-//     'sadsadda'
-//   );
-// };
+const data = {
+  project_goal: {
+    ref: ref<QInput | null>(null),
+    model: ref<number>(),
+  },
+};
+
+const triggerDonation = () => {
+  fundAProject(props.index, data.project_goal.model.value as number);
+};
+
+const navigateTo = (id: number) => {
+  router.push({ name: 'project', params: { param: id } });
+};
 
 const openDialog = ref(false);
 </script>

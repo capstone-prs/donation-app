@@ -18,37 +18,50 @@
         />
         <q-fab-action
           square
-          label="DONORS"
+          label="ABOUT"
           text-color="grey-7"
-          @click="navigateTo('donor')"
+          @click="navigateTo('about')"
         />
         <q-fab-action
           square
           label="PROJECTS"
           text-color="grey-7"
-          @click="navigateTo('project')"
+          @click="navigateTo('projects')"
         />
       </q-fab>
     </div>
     <div class="row">
       <div class="col">
-        <q-btn
+        <q-avatar
           flat
           round
-          icon="person"
           text-color="teal"
           style="background-color: rgb(244, 244, 244)"
-          size="20px"
+          size="55px"
           @click="navigateTo('profile')"
-        />
+        >
+          <img :src="currentUser?.photoURL || ''" alt="" />
+        </q-avatar>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { getAuth, User } from 'firebase/auth';
+import { computed, onBeforeMount, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import app from 'src/boot/firebase';
+
+const currentUser = ref<User | null>(null);
+
+onBeforeMount(() =>
+  getAuth(app)
+    .authStateReady()
+    .then(() => {
+      currentUser.value = getAuth(app).currentUser;
+    })
+);
 
 const router = useRouter();
 const isFabOpen = ref(false);

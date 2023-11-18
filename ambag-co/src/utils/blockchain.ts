@@ -37,12 +37,12 @@ export const getAllProjects = async () => {
 
 export const fundAProject = async (
   projectToFund: number,
-  amountToSend: string
+  amountToSend: number
 ) => {
   const result = await contract.methods.fundProject(projectToFund).send({
     from: account[0],
     gas: '3000000',
-    value: web3.utils.toWei(amountToSend, 'ether'),
+    value: web3.utils.toWei(amountToSend.toString(), 'ether'),
   });
 
   console.log(result);
@@ -50,6 +50,17 @@ export const fundAProject = async (
 
 export const getProjectDonors = async (projectId: number) => {
   const donors = await contract.methods.getDonors(projectId).call();
-
   console.log(donors);
+  return donors;
+};
+
+export const getProject = async (id: number) => {
+  const projects = await contract.methods.getAllProjects().call();
+
+  for (let i = 0; i < projects.length; i++) {
+    if (i === id) {
+      console.log(projects[id]);
+      return projects[id];
+    }
+  }
 };
