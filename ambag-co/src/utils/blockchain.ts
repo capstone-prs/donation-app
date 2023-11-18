@@ -4,7 +4,7 @@ import { contract_abi } from '../pages/contract_abi';
 export const web3 = new Web3((window as any).ethereum);
 export const contract = new web3.eth.Contract(
   contract_abi,
-  '0x16640884714d2135648872346fa35ac14f77344c'
+  '0xa35fcb5fde87d68ef81f9beec0cc20af69f4aedb'
 );
 
 const account = await (window as any).ethereum.request({
@@ -12,7 +12,6 @@ const account = await (window as any).ethereum.request({
 });
 
 export const createAProject = async (
-  address: string,
   title: string,
   desc: string,
   amount: number,
@@ -20,10 +19,10 @@ export const createAProject = async (
   bgImage: string
 ) => {
   await contract.methods
-    .createProject(address, title, desc, amount, deadline, bgImage)
+    .createProject(account[0], title, desc, amount, deadline, bgImage)
     .send({
       from: account[0],
-      gas: '3000000',
+      gas: '7000000',
     })
     .catch((err) => {
       console.log('error:', err);
