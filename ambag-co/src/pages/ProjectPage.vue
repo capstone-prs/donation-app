@@ -9,7 +9,7 @@
         style="color: teal"
         align="center"
       >
-        PROJECTS
+        HOME
       </div>
       <div>
         <template v-for="(project, index) in projects" :key="index">

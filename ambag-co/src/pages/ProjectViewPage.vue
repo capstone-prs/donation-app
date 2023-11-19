@@ -27,7 +27,7 @@
         {{ project?.description }}
       </div>
       <q-separator class="q-ma-md" color="grey" />
-      <div class="text-h5 q-mb-lg q-ml-lg" style="color: teal" align="left">
+      <div class="text-h5 q-mb-lg" style="color: teal" align="center">
         DONATIONS
       </div>
       <div class="text-h7 q-ml-xl" style="color: grey" align="left">

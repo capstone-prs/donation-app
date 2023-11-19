@@ -22,12 +22,6 @@
           text-color="grey-7"
           @click="navigateTo('about')"
         />
-        <q-fab-action
-          square
-          label="PROJECTS"
-          text-color="grey-7"
-          @click="navigateTo('projects')"
-        />
       </q-fab>
     </div>
     <div class="row">
@@ -85,6 +79,6 @@ const navigateTo = (page: string) => {
 
 <style>
 .push-below {
-  margin-bottom: 150px;
+  margin-bottom: 100px;
 }
 </style>
