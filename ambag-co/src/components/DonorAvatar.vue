@@ -21,7 +21,7 @@ defineProps({
     required: true,
   },
   donation: {
-    type: Number,
+    type: String,
     required: true,
   },
 });

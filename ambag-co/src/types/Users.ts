@@ -9,6 +9,7 @@ export interface Project {
   title: string;
   description: string;
   goal: number;
+  amountCollected: number;
   deadline: number;
   image: string;
 }

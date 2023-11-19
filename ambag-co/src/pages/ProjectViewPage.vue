@@ -11,10 +11,7 @@
       >
         {{ project?.title }}
       </div>
-      <div class="text-h6" style="color: grey" align="center">
-        <q-icon name="paid" size="25px" color="teal" />
-        {{ project?.goal }} ETH
-      </div>
+
       <div align="center">
         <q-img
           :src="project?.image"
@@ -29,15 +26,36 @@
       >
         {{ project?.description }}
       </div>
-      <q-separator class="q-ma-md" />
-      <div
-        class="text-h5 q-mb-lg q-ml-xl q-mr-xl"
-        style="color: teal"
-        align="center"
-      >
+      <q-separator class="q-ma-md" color="grey" />
+      <div class="text-h5 q-mb-lg q-ml-lg" style="color: teal" align="left">
         DONATIONS
       </div>
-
+      <div class="text-h7 q-ml-xl" style="color: grey" align="left">
+        <q-icon name="paid" size="25px" color="teal" />
+        {{ project?.goal }} ETH
+      </div>
+      <div class="text-h7 q-ml-xl" style="color: grey" align="LEFT">
+        <q-icon name="handshake" size="25px" color="teal" />
+        {{
+          parseFloat(
+            web3.utils.fromWei(project.amountCollected.toString(), 'ether')
+          ).toFixed(2)
+        }}
+        ETH
+      </div>
+      <q-separator class="q-ml-xl q-mr-xl" />
+      <div class="text-h6 q-ml-xl q-mb-lg" style="color: grey" align="LEFT">
+        <q-icon name="wallet" size="25px" color="teal" />
+        {{
+          (
+            project!.goal -
+            parseFloat(
+              web3.utils.fromWei(project.amountCollected.toString(), 'ether')
+            )
+          ).toFixed(2)
+        }}
+        ETH
+      </div>
       <div
         v-if="donationInfo.length == 0"
         class="text-h7 q-mb-lg q-ml-xl q-mr-xl text-italic"
@@ -47,7 +65,14 @@
         No one has donated yet
       </div>
       <template v-for="(entry, index) in donationInfo" :key="index">
-        <DonorAvatar :address="entry.address" :donation="entry.donation" />
+        <DonorAvatar
+          :address="entry.address"
+          :donation="
+            parseFloat(
+              web3.utils.fromWei(entry.donation.toString(), 'ether')
+            ).toFixed(2)
+          "
+        />
       </template>
       <q-btn
         glossy
@@ -79,12 +104,20 @@ import { Donor, Project } from '../types/Users';
 import DonorAvatar from '../components/DonorAvatar.vue';
 import DonateDialog from '../components/DonateDialog.vue';
 import { useQuasar } from 'quasar';
+import { web3 } from '../utils/blockchain';
 
 const $q = useQuasar();
 
 const router = useRouter();
 const projectIndex = router.currentRoute.value.params.param as string;
-const project = ref<Project>();
+const project = ref<Project>({
+  title: '',
+  description: '',
+  goal: 0,
+  amountCollected: 0,
+  deadline: 0,
+  image: '',
+});
 const donationInfo = ref<Donor[]>([]);
 const isDialogOpen = ref(false);
 
