@@ -24,9 +24,7 @@
           world.
         </p>
         <q-separator class="q-ma-md" />
-        <p class="text-h5 q-ma-xl text-justify" style="color: teal">
-          OUR VISION
-        </p>
+        <p class="text-h5 q-ma-xl text-left" style="color: teal">OUR VISION</p>
         <p class="text-h7 q-ma-xl text-justify">
           Ambag.co envisions a world where philanthropy is accessible to
           everyone, transcending borders and barriers. By leveraging the
@@ -36,7 +34,7 @@
         </p>
 
         <q-separator class="q-ma-md" />
-        <p class="text-h5 q-ma-xl text-justify" style="color: teal">
+        <p class="text-h5 q-ma-xl text-left" style="color: teal">
           TRANSPARENCY AND SECURITY
         </p>
         <p class="text-h7 q-ma-xl text-justify">

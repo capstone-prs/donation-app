@@ -1,5 +1,8 @@
 import Web3 from 'web3';
 import { contract_abi } from '../pages/contract_abi';
+import { useQuasar } from 'quasar';
+
+const $q = useQuasar();
 
 export const web3 = new Web3((window as any).ethereum);
 export const contract = new web3.eth.Contract(
@@ -18,20 +21,21 @@ export const createAProject = async (
   deadline: number,
   bgImage: string
 ) => {
-  await contract.methods
+  const result = await contract.methods
     .createProject(account[0], title, desc, amount, deadline, bgImage)
     .send({
       from: account[0],
       gas: '7000000',
     })
     .catch((err) => {
-      console.log('error:', err);
+      console.log(err);
     });
+  console.log(result);
+  return result;
 };
 
 export const getAllProjects = async () => {
   const projects = await contract.methods.getAllProjects().call();
-  console.log(projects);
   return projects;
 };
 
@@ -45,7 +49,7 @@ export const fundAProject = async (
     value: web3.utils.toWei(amountToSend.toString(), 'ether'),
   });
 
-  console.log(result);
+  return result;
 };
 
 export const getProjectDonors = async (projectId: number) => {

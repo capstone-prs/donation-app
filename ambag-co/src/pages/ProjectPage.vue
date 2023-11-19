@@ -45,12 +45,17 @@ import ProjectComponent from '../components/ProjectComponent.vue';
 import { Project } from '../types/Users';
 import AddProject from './AddProject.vue';
 import { getAllProjects } from '../utils/blockchain';
+import { useQuasar } from 'quasar';
+
+const $q = useQuasar();
 
 const projects = ref<Project[]>([]);
 
 onBeforeMount(() => {
+  $q.loading.show();
   getAllProjects().then((data) => {
     projects.value = data;
+    $q.loading.hide();
   });
 });
 

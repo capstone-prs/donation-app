@@ -78,6 +78,9 @@ import { onBeforeMount, ref } from 'vue';
 import { Donor, Project } from '../types/Users';
 import DonorAvatar from '../components/DonorAvatar.vue';
 import DonateDialog from '../components/DonateDialog.vue';
+import { useQuasar } from 'quasar';
+
+const $q = useQuasar();
 
 const router = useRouter();
 const projectIndex = router.currentRoute.value.params.param as string;
@@ -90,6 +93,7 @@ const openDialog = () => {
 };
 
 onBeforeMount(() => {
+  $q.loading.show();
   getProject(parseInt(projectIndex)).then((data) => {
     project.value = data;
   });
@@ -102,6 +106,7 @@ onBeforeMount(() => {
         address,
         donation: Number(donations[index]),
       }));
+      $q.loading.hide();
     }
   );
 });

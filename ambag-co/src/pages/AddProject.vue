@@ -129,18 +129,8 @@ const triggerNotify = (type: string, message: string) => {
   });
 };
 
-const showLoading = () => {
-  $q.loading.show({
-    spinnerColor: 'white',
-    backgroundColor: 'black',
-  });
-
-  setTimeout(() => {
-    $q.loading.hide();
-  }, 4000);
-};
-
-const submitAddProject = () => {
+const submitAddProject = async () => {
+  $q.loading.show();
   Object.values(data).map((field) => field.ref.value?.validate());
   const hasErrors = Object.values(data).some(
     (field) => field.ref.value?.hasError
@@ -156,24 +146,22 @@ const submitAddProject = () => {
     project_deadline: data.project_deadline.model.value ?? 0,
     project_image: data.project_image.model.value ?? '',
   };
-  // return addProjects(projectData).then(() => {
-  //   location.reload();
-  //   showLoading();
-  //   isDialogOpen.value = false;
-  //   triggerNotify('positive', 'Project Added!');
-  // });
 
-  return createAProject(
-    projectData.project_name,
-    projectData.project_description,
-    projectData.project_goal,
-    new Date(projectData.project_deadline).getTime(),
-    projectData.project_image
-  ).then(() => {
-    // location.reload();
-    showLoading();
+  try {
+    await createAProject(
+      projectData.project_name,
+      projectData.project_description,
+      projectData.project_goal,
+      new Date(projectData.project_deadline).getTime(),
+      projectData.project_image
+    );
+    location.reload();
+    $q.loading.hide();
     isDialogOpen.value = false;
     triggerNotify('positive', 'Project Added!');
-  });
+  } catch (error) {
+    $q.loading.hide();
+    triggerNotify('negative', 'Something went wrong. Try again later');
+  }
 };
 </script>

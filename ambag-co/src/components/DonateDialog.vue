@@ -59,7 +59,10 @@ import { ref } from 'vue';
 import { fundAProject } from '../utils/blockchain';
 import { QInput } from 'quasar';
 import { useRouter } from 'vue-router';
+import { useQuasar } from 'quasar';
 
+const $q = useQuasar();
+const openDialog = ref(false);
 const router = useRouter();
 
 const props = defineProps({
@@ -84,13 +87,29 @@ const data = {
   },
 };
 
-const triggerDonation = () => {
-  fundAProject(props.index, data.project_goal.model.value as number);
+const triggerNotify = (type: string, message: string) => {
+  $q.notify({
+    type: type,
+    message: message,
+  });
+};
+
+const triggerDonation = async () => {
+  $q.loading.show();
+
+  try {
+    await fundAProject(props.index, data.project_goal.model.value as number);
+    location.reload();
+    $q.loading.hide();
+    openDialog.value = false;
+    triggerNotify('positive', 'Successfully donated!');
+  } catch (error) {
+    $q.loading.hide();
+    triggerNotify('negative', 'Something went wrong. Try again later');
+  }
 };
 
 const navigateTo = (id: number) => {
   router.push({ name: 'project', params: { param: id } });
 };
-
-const openDialog = ref(false);
 </script>

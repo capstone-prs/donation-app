@@ -16,29 +16,27 @@
       </div>
       <div class="q-pt-md centered-content">
         <span style="color: grey">{{ currentUser?.email }}</span>
-        <h6 style="color: grey">Projects Started</h6>
-        <h5 style="color: teal">90</h5>
-        <h6 style="color: grey">Donations Made</h6>
-        <h5 style="color: teal">90 ETH</h5>
       </div>
-      <div class="q-pb-xl q-ma-md centered-content">
+      <div class="q-pb-sm q-mt-xl centered-content">
         <q-btn
           rounded
           outline
           color="teal-5"
-          size="lg"
+          size="md"
           @click="connectToWallet"
         >
           <q-icon name="img:/metamask-logo.png" />
           CONNECT TO WALLET
         </q-btn>
       </div>
-      <div class="q-mt-xl centered-content">
-        <q-btn rounded color="teal-5" size="lg" @click="handleLogOut"
+    </q-page-container>
+    <q-footer class="transparent">
+      <div class="q-ma-xl centered-content">
+        <q-btn rounded glossy color="teal-5" size="lg" @click="handleLogOut"
           >LOGOUT</q-btn
         >
       </div>
-    </q-page-container>
+    </q-footer>
   </q-layout>
 </template>
 
