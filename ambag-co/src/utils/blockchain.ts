@@ -27,10 +27,9 @@ export const createAProject = async (
       from: account[0],
       gas: '7000000',
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((err: Error) => {
+      return err;
     });
-  console.log(result);
   return result;
 };
 
@@ -54,7 +53,6 @@ export const fundAProject = async (
 
 export const getProjectDonors = async (projectId: number) => {
   const donors = await contract.methods.getDonors(projectId).call();
-  console.log(donors);
   return donors;
 };
 
@@ -63,7 +61,6 @@ export const getProject = async (id: number) => {
 
   for (let i = 0; i < projects.length; i++) {
     if (i === id) {
-      console.log(projects[id]);
       return projects[id];
     }
   }
