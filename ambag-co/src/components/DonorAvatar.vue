@@ -1,12 +1,37 @@
 <template>
-  <div class="row q-mt-md q-mr-lg">
-    <div class="col">
-      <q-avatar size="60px" round color="white">
-        <img src="/system-icon.png" />
-      </q-avatar>
-      <div class="text-h6 q-mt-sm" style="color: white">
-        <i>PAUL RENZO SUE</i>
-      </div>
-    </div>
-  </div>
+  <q-card class="q-ma-md">
+    <q-item>
+      <q-item-section avatar>
+        <q-avatar color="green" text-color="white">
+          <q-icon name="paid" />
+        </q-avatar>
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>{{ trimAddress(address) }}</q-item-label>
+        <q-item-label caption> {{ donation }} ETH</q-item-label>
+      </q-item-section>
+    </q-item>
+  </q-card>
 </template>
+
+<script setup lang="ts">
+defineProps({
+  address: {
+    type: String,
+    required: true,
+  },
+  donation: {
+    type: String,
+    required: true,
+  },
+});
+
+const trimAddress = (address: string, startChars = 6, endChars = 4): string => {
+  if (!address) return '';
+
+  const trimmedStart = address.slice(0, startChars);
+  const trimmedEnd = address.slice(-endChars);
+
+  return `${trimmedStart}...${trimmedEnd}`;
+};
+</script>

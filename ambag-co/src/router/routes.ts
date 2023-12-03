@@ -12,19 +12,24 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/home',
-    component: () => import('pages/HomePage.vue'),
-  },
-  {
-    path: '/project',
     component: () => import('pages/ProjectPage.vue'),
   },
   {
-    path: '/donor',
-    component: () => import('pages/DonorPage.vue'),
+    path: '/projects',
+    component: () => import('pages/ProjectPage.vue'),
+  },
+  {
+    path: '/about',
+    component: () => import('pages/AboutPage.vue'),
   },
   {
     path: '/profile',
     component: () => import('pages/ProfilePage.vue'),
+  },
+  {
+    path: '/project/:param',
+    name: 'project',
+    component: () => import('pages/ProjectViewPage.vue'),
   },
 
   // Always leave this as last one,

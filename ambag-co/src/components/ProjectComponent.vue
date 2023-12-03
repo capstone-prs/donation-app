@@ -12,15 +12,16 @@
             {{ goalFunding }}
           </div>
           <div class="text-subtitle2" style="color: grey">
-            <q-icon name="groups_2" size="25px" color="teal" />
-            {{ targetRecipient }}
+            <q-icon name="info" size="25px" color="teal" />
+            {{ description }}
           </div>
         </q-card-section>
       </q-card>
     </div>
     <div>
       <donate-dialog
-        :recipient="targetRecipient"
+        :index="projectIndex"
+        :deadline="deadline"
         :target-fund="goalFunding"
         v-model="isDialogOpen"
       />
@@ -33,20 +34,27 @@ import { ref } from 'vue';
 import DonateDialog from './DonateDialog.vue';
 
 defineProps({
+  projectIndex: {
+    type: Number,
+    required: true,
+  },
   projectTitle: {
     type: String,
     required: true,
   },
-
   goalFunding: {
     type: Number,
     required: true,
   },
-  targetRecipient: {
-    type: String,
+  deadline: {
+    type: Number,
     required: true,
   },
   backgroundImage: {
+    type: String,
+    required: true,
+  },
+  description: {
     type: String,
     required: true,
   },
